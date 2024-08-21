@@ -1,80 +1,44 @@
 package pieces;
 
+import board.Color;
+import board.PieceType;
+import board.XiangQiBoard;
+
+import java.util.List;
+
 public class Cannon extends Pieces {
-        private String name;
-        private boolean color;
-        private int x;
-        private int y;
-        private final static String imagePathForBlack = "images/BlackTeam/Black_Cannon_1.png";
-        private final static String imagePathForRed = "images/RedTeam/Red_Cannon_1.png";
-
-        public Cannon() {
-
-        }
-
-        public Cannon(String name, boolean color, int x, int y) {
-            this.name = name;
-            this.color = color;
-            this.x = x;
-            this.y = y;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public boolean isColor() {
-            return color;
-        }
-
-        public void setColor(boolean color) {
-            this.color = color;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public double getValueAndPiece(String name, boolean color) {
-             return super.getValueAndPiece(name, color);
-        }
-
-        @Override
-        public void move(int ToDestinationX, int ToDestinationY) {
-            this.x = ToDestinationX;
-            this.y = ToDestinationY;
-        }
-
-        @Override
-        public boolean isValidMove(int startedAtX,int startedAtY,int movedToX, int movedToY, Pieces[][] board) {
-            return true;
-        }
-
-        @Override
-        public String getImagePathForRed() {
-            return imagePathForRed;
-        }
-
-        public String getImagePathForBlack() {
-            return imagePathForBlack;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
+    private final PieceType name = PieceType.CANNON;
+    private Color color;
 
 
+    public Cannon(Color color, int positionX, int positionY, double point, XiangQiBoard xiangQiBoard) {
+        super(color, positionX, positionY, point, xiangQiBoard);
     }
+
+    public double getPoint() {
+        if (color == Color.RED){
+            return 4.5;
+        } else {
+            return -4.5;
+        }
+    }
+
+
+    public PieceType getName() {
+        return name;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public Integer[][] getLegalMoves() {
+        return new Integer[0][];
+    }
+
+    @Override
+    public Integer[][] getAvailableMoves() {
+        return new Integer[0][];
+    }
+}
