@@ -3,8 +3,8 @@
 package board;
 
 import pieces.*;
+import utility.XiangQiUtility;
 
-import java.security.Guard;
 import java.util.Arrays;
 
 
@@ -24,6 +24,7 @@ public class XiangQiBoard implements BoardInterface {
 
     private Position[][] positions = new Position[DEFAULT_NUM_ROW][DEFAULT_NUM_COL];
 
+
     public boolean soldierCrossedTheRiver;
 
     public String capturedToString;
@@ -38,6 +39,7 @@ public class XiangQiBoard implements BoardInterface {
         this.initializeDefaultPieces();
     }
 
+
     public Position getPositionAt(int x, int y) {
         return this.positions[x][y];
     }
@@ -46,13 +48,12 @@ public class XiangQiBoard implements BoardInterface {
         return this.positions;
     }
 
-    public Position[] getAllPosition() {
-        Position[] positionArray = new Position[90];
-        int COUNT = 0;
+    public Position[][] getAllPosition() {
+        Position[][] positionArray = new Position[10][9];
 
         for(int ROW = 0; ROW < DEFAULT_NUM_ROW ; ++ROW) {
             for(int COLUMN = 0; COLUMN < DEFAULT_NUM_COL; ++COLUMN) {
-                positionArray[COUNT++] = this.positions[ROW][COLUMN];
+                positionArray[ROW][COLUMN] = this.positions[ROW][COLUMN];
             }
         }
 
@@ -76,46 +77,52 @@ public class XiangQiBoard implements BoardInterface {
         return DEFAULT_NUM_COL;
     }
 
+
     public void initializeDefaultPieces() {
-        this.positions[0][0].setPieces(new Chariot(Color.BLACK, 0, 0, -9, this));
-        this.positions[0][1].setPieces(new Horse(Color.BLACK, 0, 1, -4, this));
-        this.positions[0][2].setPieces(new Elephant(Color.BLACK, 0, 2, -3, this));
-        this.positions[0][3].setPieces(new Guardian(Color.BLACK, 0, 4, -2, this));
-        this.positions[0][4].setPieces(new General(Color.BLACK, 0, 4, -100, this));
-        this.positions[0][5].setPieces(new Guardian(Color.BLACK, 0, 5, -2, this));
-        this.positions[0][6].setPieces(new Elephant(Color.BLACK, 0, 6, -3, this));
-        this.positions[0][7].setPieces(new Horse(Color.BLACK, 0, 7, -4, this));
-        this.positions[0][8].setPieces(new Chariot(Color.BLACK, 0, 8, -9, this));
+        this.positions[0][0].setPieces(new Chariot(Color.BLACK, PieceType.CHARIOT, 0, 0, -9, this));
+        this.positions[0][1].setPieces(new Horse(Color.BLACK, PieceType.HORSE,0, 1, -4, this));
+        this.positions[0][2].setPieces(new Elephant(Color.BLACK, PieceType.ELEPHANT,0, 2, -3, this));
+        this.positions[0][3].setPieces(new Guardian(Color.BLACK, PieceType.GUARDIAN,0, 4, -2, this));
+        this.positions[0][4].setPieces(new General(Color.BLACK, PieceType.GENERAL,0, 4, -100, this));
+        this.positions[0][5].setPieces(new Guardian(Color.BLACK, PieceType.GUARDIAN,0, 5, -2, this));
+        this.positions[0][6].setPieces(new Elephant(Color.BLACK, PieceType.ELEPHANT,0, 6, -3, this));
+        this.positions[0][7].setPieces(new Horse(Color.BLACK, PieceType.HORSE,0, 7, -4, this));
+        this.positions[0][8].setPieces(new Chariot(Color.BLACK, PieceType.CHARIOT,0, 8, -9, this));
         /* CREATING 2 CANNONS FOR BLACK */
-        this.positions[2][1].setPieces(new Cannon(Color.BLACK, 2, 1, -4.5, this));
-        this.positions[2][7].setPieces(new Chariot(Color.BLACK, 0, 0, -4.5, this));
+        this.positions[2][1].setPieces(new Cannon(Color.BLACK,PieceType.CANNON, 2, 1, -4.5, this));
+        this.positions[2][7].setPieces(new Chariot(Color.BLACK, PieceType.CANNON,0, 0, -4.5, this));
 
         /* CREATING 5 SOLDIERS FOR BLACK */
 
         for (int i = 0; i < 9 ; i = i + 2){
-            this.positions[3][i].setPieces(new Soldier(Color.BLACK, 3, i, -1, this));
+            this.positions[3][i].setPieces(new Soldier(Color.BLACK, PieceType.SOLDIER,3, i, -1, this));
         }
 
         /* RED PIECES CREATING */
 
-        this.positions[9][0].setPieces(new Chariot(Color.RED, 9, 0, 9, this));
-        this.positions[9][1].setPieces(new Horse(Color.RED, 9, 1, 4, this));
-        this.positions[9][2].setPieces(new Elephant(Color.RED, 9, 2, 2, this));
-        this.positions[9][3].setPieces(new Guardian(Color.RED, 9, 3, 2, this));
-        this.positions[9][4].setPieces(new General(Color.RED, 9, 4, 100, this));
-        this.positions[9][5].setPieces(new Guardian(Color.RED, 9, 5, 2, this));
-        this.positions[9][6].setPieces(new Elephant(Color.RED, 9, 6, 2, this));
-        this.positions[9][7].setPieces(new Horse(Color.RED, 9, 7, 4, this));
-        this.positions[9][8].setPieces(new Chariot(Color.RED, 9, 8, 9, this));
+        this.positions[9][0].setPieces(new Chariot(Color.RED, PieceType.CHARIOT,9, 0, 9, this));
+        this.positions[9][1].setPieces(new Horse(Color.RED, PieceType.HORSE,9, 1, 4, this));
+        this.positions[9][2].setPieces(new Elephant(Color.RED, PieceType.ELEPHANT,9, 2, 2, this));
+        this.positions[9][3].setPieces(new Guardian(Color.RED, PieceType.GUARDIAN,9, 3, 2, this));
+        this.positions[9][4].setPieces(new General(Color.RED,PieceType.GENERAL, 9, 4, 100, this));
+        this.positions[9][5].setPieces(new Guardian(Color.RED, PieceType.GUARDIAN,9, 5, 2, this));
+        this.positions[9][6].setPieces(new Elephant(Color.RED,PieceType.ELEPHANT, 9, 6, 2, this));
+        this.positions[9][7].setPieces(new Horse(Color.RED,PieceType.HORSE, 9, 7, 4, this));
+        this.positions[9][8].setPieces(new Chariot(Color.RED, PieceType.CHARIOT,9, 8, 9, this));
 
         /* CREATING 2 CANNONS FOR RED */
-        this.positions[7][1].setPieces(new Cannon(Color.RED, 7, 1, 4.5, this));
-        this.positions[7][7].setPieces(new Cannon(Color.RED, 7, 7, 4.5, this));
+        this.positions[7][1].setPieces(new Cannon(Color.RED, PieceType.CANNON,7, 1, 4.5, this));
+        this.positions[7][7].setPieces(new Cannon(Color.RED, PieceType.CANNON,7, 7, 4.5, this));
 
         /* CREATING 5 SOLDIERS FOR RED */
         for (int i = 0; i < 9 ; i = i + 2){
-            this.positions[6][i].setPieces(new Soldier(Color.RED, 6, i, 1, this));
+            this.positions[6][i].setPieces(new Soldier(Color.RED, PieceType.SOLDIER, 6, i, 1, this));
         }
+
+    }
+
+    public void move(Position current, Position another) {
+
     }
 
     private void attachGameAllPieces() {

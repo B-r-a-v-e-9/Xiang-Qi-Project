@@ -11,34 +11,17 @@ public class Guardian extends Pieces {
     private Color color;
     private boolean crossedTheRiver;
 
-    public Guardian(Color color, int positionX, int positionY, double point, XiangQiBoard xiangQiBoard) {
-        super(color, positionX, positionY, point, xiangQiBoard);
-    }
-
-    public double getPoint() {
-        if (color == Color.RED) {
-            return 2;
-        } else {
-            return -2;
-        }
-    }
-
-
-    public PieceType getName() {
-        return name;
-    }
-
-    public Color getColor() {
-        return color;
+    public Guardian(Color color,PieceType pieceType, int positionX, int positionY, double point, XiangQiBoard xiangQiBoard) {
+        super(color, PieceType.GUARDIAN, positionX, positionY, point, xiangQiBoard);
     }
 
     @Override
-    public Integer[][] getLegalMoves() {
-        return new Integer[0][];
+    public Double[][] getLegalMoves() {
+        return new Double[0][];
     }
 
     @Override
-    public Integer[][] getAvailableMoves() {
-        return new Integer[0][];
+    public Double[][] getAvailableMoves() {
+        return new Double[0][];
     }
 }

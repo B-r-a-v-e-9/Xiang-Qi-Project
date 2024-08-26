@@ -1,0 +1,7 @@
+Quy định về cách di chuyển, ăn quân
+1.	Đầu tiên, ta quy định quân ở trong ma trận 10 (dòng) x 9 (cột) là điểm số mà quân đó có (VD: Quân tốt đen là
+2.	Ta cho những ô được đánh số 0 là những ô quân đó không đi được (bị chặn hoặc bị ghim)
+3.	Ta cho những ô được đánh số 10 là những ô quân đó đi được
+4.	Ta cho những ô được đánh số 20 là những ô quân đó ăn được
+5.	Ta cho những ô được đánh số 30 là những ô quân đó không ăn được (đồng minh)
+Lưu ý rằng quân tướng là 50

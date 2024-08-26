@@ -51,6 +51,16 @@ public class Position {
     }
 
     public boolean isSamePosition(Position another) {
-        return this.positionX == another.positionX && this.positionY == another.positionY;
+        if (!this.isOccupied() && !another.isOccupied()) {
+            return true;
+        } else if (!this.isOccupied() && another.isOccupied()) {
+            return false;
+        } else if (this.isOccupied() && !another.isOccupied()) {
+            return false;
+        } else {
+            Pieces thisPiece = this.getPieces();
+            Pieces anotherPiece = another.getPieces();
+            return thisPiece.toString().equals(anotherPiece.toString());
+        }
     }
 }

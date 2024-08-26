@@ -2,12 +2,8 @@ package pieces;
 
 /* © COPYRIGHT BY BRAVE */
 
-import board.Color;
-import board.Position;
-import board.XiangQiBoard;
-import board.XiangQiGame;
+import board.*;
 import exception.PinnedPieceException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +15,7 @@ public abstract class Pieces {
     public XiangQiGame xiangQiGame;
     protected XiangQiBoard xiangQiBoard;
     protected Color color;
+    protected PieceType pieceType;
     private boolean isPinned;
     private boolean pinning;
     private final double point;
@@ -26,8 +23,9 @@ public abstract class Pieces {
     public int positionY;
 
 
-    public Pieces(Color color, int positionX, int positionY, double point, XiangQiBoard board) {
+    public Pieces(Color color, PieceType pieceType, int positionX, int positionY, double point, XiangQiBoard board) {
         this.color = color;
+        this.pieceType = pieceType;
         this.positionX = positionX;
         this.positionY = positionY;
         this.point = point;
@@ -75,6 +73,14 @@ public abstract class Pieces {
      * */
     public Color getColor() {
         return this.color;
+    }
+
+    public PieceType getPieceType() {
+        return pieceType;
+    }
+
+    public void setPieceType(PieceType pieceType) {
+        this.pieceType = pieceType;
     }
 
     /**
@@ -131,13 +137,27 @@ public abstract class Pieces {
     /**
      * Hàm lấy những nước đi được, trả về là một mảng 2 chiều
      * */
-    public abstract Integer[][] getAvailableMoves();
+    public abstract Double[][] getAvailableMoves();
 
-    public abstract Integer[][] getLegalMoves();
 
+    /**
+     * Hàm lấy những nước đi hợp lệ, trả về là một mảng 2 chiều
+     * */
+    public abstract Double[][] getLegalMoves();
+
+
+    /**
+     * Hàm lấy kiểm tra quân cờ có nằm ở trong bàn cờ (ở vị trí hợp lệ) hay không, trả về là boolean
+     * @param x Tọa độ x của quân cờ
+     * @param y Tọa độ y của quân cờ
+     * */
     public boolean withinBoard(int x, int y) {
         return x >= 0 && y >= 0 && x < this.xiangQiBoard.getRowNumber() && y < this.xiangQiBoard.getColumnNumber();
     }
 
+    @Override
+    public String toString() {
+        return getColor().toString() + getPieceType();
+    }
 }
 
