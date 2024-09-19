@@ -3,16 +3,8 @@ package pieces;
 /* © COPYRIGHT BY BRAVE */
 
 import board.*;
-import exception.PinnedPieceException;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 
 public abstract class Pieces {
-    public XiangQiGame xiangQiGame;
     protected XiangQiBoard xiangQiBoard;
     protected Color color;
     protected PieceType pieceType;
@@ -35,14 +27,6 @@ public abstract class Pieces {
     }
 
     /**
-     * Hàm gắn đối tượng XiangQiGame vào phương thức hiện tại.
-     * @param xiangQiGame object của XiangQiGame
-     */
-    public void attachGame(XiangQiGame xiangQiGame) {
-        this.xiangQiGame = xiangQiGame;
-    }
-
-    /**
      * Ghi đối tượng vào XiangQiBoard hiện tại
      * @param xiangQiBoard object của XiangQiBoard
      */
@@ -61,6 +45,13 @@ public abstract class Pieces {
     }
 
     /**
+     * Hàm lấy vị trí của quân cờ trên bàn cờ
+     * */
+    public Integer[][] getPosition() {
+        return new Integer[][]{{positionX, positionY}};
+    }
+
+    /**
      * Hàm ghi màu của quân cờ
      * @param color Màu của quân cờ
      * */
@@ -75,10 +66,16 @@ public abstract class Pieces {
         return this.color;
     }
 
+    /**
+     * Hàm lấy kiểu quân cờ
+     * */
     public PieceType getPieceType() {
         return pieceType;
     }
 
+    /**
+     * Hàm ghi kiểu quân cờ
+     * */
     public void setPieceType(PieceType pieceType) {
         this.pieceType = pieceType;
     }
@@ -122,16 +119,20 @@ public abstract class Pieces {
      * Hàm kiểm tra quân cờ có phải là đồng minh hay không
      * @param another Quân cờ ở vị trí (position) khác
      * */
-    public boolean isAlly(Position another) {
-        return another.isOccupied() && another.getPieces().getColor().equals(this.color); /*  EQUAL means that its ally*/
+    public boolean isAlly(Pieces another) {
+        return another.getColor() == this.color;
     }
 
     /**
      * Hàm kiểm tra quân cờ có phải là kẻ địch hay không
      * @param another Quân cờ ở vị trí (position) khác
      * */
-    public boolean isEnemy(Position another) {
-        return another.isOccupied() && ! (another.getPieces().getColor().equals(this.color)) /* NOT EQUAL means that its enemy */;
+    public boolean isEnemy(Pieces another) {
+        return another.getColor() != this.color;
+    }
+
+    public Pieces getPiece() {
+        return this;
     }
 
     /**
@@ -139,21 +140,11 @@ public abstract class Pieces {
      * */
     public abstract Double[][] getAvailableMoves();
 
-
     /**
      * Hàm lấy những nước đi hợp lệ, trả về là một mảng 2 chiều
      * */
     public abstract Double[][] getLegalMoves();
 
-
-    /**
-     * Hàm lấy kiểm tra quân cờ có nằm ở trong bàn cờ (ở vị trí hợp lệ) hay không, trả về là boolean
-     * @param x Tọa độ x của quân cờ
-     * @param y Tọa độ y của quân cờ
-     * */
-    public boolean withinBoard(int x, int y) {
-        return x >= 0 && y >= 0 && x < this.xiangQiBoard.getRowNumber() && y < this.xiangQiBoard.getColumnNumber();
-    }
 
     @Override
     public String toString() {

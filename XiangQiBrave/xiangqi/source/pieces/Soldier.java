@@ -38,12 +38,8 @@ public class Soldier extends Pieces {
         return null;
     }
 
-    @Override
     public Double[][] getLegalMoves() {
-        Double[][] legalMoves = new Double[10][9];
-        legalMoves[0][0] = 11.0;
-        return legalMoves;
+        return null;
     }
-
 
 }
